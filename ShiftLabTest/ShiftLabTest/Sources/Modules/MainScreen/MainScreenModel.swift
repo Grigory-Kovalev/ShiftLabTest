@@ -9,6 +9,7 @@ import Foundation
 
 struct MainScreenModel {
     let name: String
+    let url: URL
     let startTime: Date
     let endTime: Date
 }

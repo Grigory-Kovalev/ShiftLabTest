@@ -28,7 +28,7 @@ final class MainScreenView: UIView {
     
     // MARK: - Properties
     weak var viewController: MainScreenViewControllerProtocol?
-    var dataArray: [MainScreenModel] = []
+    var contests: [MainScreenModel] = []
     
     // MARK: - Subviews
     lazy var collectionView: UICollectionView = {
@@ -56,6 +56,13 @@ final class MainScreenView: UIView {
         return button
     }()
     
+    private lazy var topSafeAreaBackground: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .secondarySystemBackground
+        return view
+    }()
+    
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,6 +87,14 @@ final class MainScreenView: UIView {
 private extension MainScreenView {
     // MARK: - Layout
     func setupUI() {
+        self.addSubview(topSafeAreaBackground)
+        NSLayoutConstraint.activate([
+            topSafeAreaBackground.topAnchor.constraint(equalTo: topAnchor),
+            topSafeAreaBackground.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            topSafeAreaBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topSafeAreaBackground.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
         self.addSubview(welcomeButton)
         NSLayoutConstraint.activate([
             welcomeButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: Metrics.welcomeButtonBottomOffset),
@@ -105,18 +120,21 @@ private extension MainScreenView {
 
 // MARK: - UICollectionViewDelegate
 extension MainScreenView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedContestURL = contests[indexPath.row].url
+        self.viewController?.contestWasTapped(with: selectedContestURL)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension MainScreenView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        dataArray.count
+        contests.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        let item = dataArray[indexPath.item]
+        let item = contests[indexPath.item]
         
         cell.configure(with: item)
         cell.backgroundColor = .systemBackground

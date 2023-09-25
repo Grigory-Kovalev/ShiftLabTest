@@ -10,6 +10,7 @@ import UIKit
 protocol MainScreenPresenterProtocol: AnyObject {
     func getContest()
     func showModalScreen()
+    func showWebView(with url: URL)
 }
 
 final class MainScreenPresenter {
@@ -22,6 +23,10 @@ final class MainScreenPresenter {
 }
 
 extension MainScreenPresenter: MainScreenPresenterProtocol {
+    func showWebView(with url: URL) {
+        self.coordinator?.presentWebView(with: url)
+    }
+    
     func showModalScreen() {
         self.coordinator?.showModalScreen()
     }

@@ -12,6 +12,7 @@ protocol CoordinatorProtocol: AnyObject {
     func showMainScreen()
     func showModalScreen()
     func closeModule()
+    func presentWebView(with url: URL)
 }
 
 final class Coordinator {
@@ -36,39 +37,33 @@ final class Coordinator {
     
     
     func push(viewController: UIViewController, isFullScreen: Bool) {
-
+        
         if isFullScreen == false {
-            print("notFullScreen")
             self.currentViewController.present(viewController, animated: true, completion: nil)
         } else {
-            print("fullScreen")
             self.currentViewController.modalPresentationStyle = .fullScreen
             viewController.modalPresentationStyle = .fullScreen
             self.currentViewController.present(viewController, animated: true, completion: nil)
         }
         
         self.viewConrtollers.append(viewController)
-        print("")
-        print("Выполнен переход на контроллер \(currentViewController)")
-        print("Текущий стек:")
-        viewConrtollers.map({ print("\($0)") })
     }
     
     func pop() {
         if viewConrtollers.count == 1 {
-            print("Нельзя закрыть корневой экран")
         } else {
-            print("")
-            print("Закрыл \(currentViewController)")
             self.currentViewController.dismiss(animated: true)
             self.viewConrtollers.removeLast()
-            print("Текущий стек:")
-            viewConrtollers.map({ print("\($0)") })
         }
     }
 }
 
 extension Coordinator: CoordinatorProtocol {
+    func presentWebView(with url: URL) {
+        let vc = WebViewAssembly(url: url).createModule()
+        self.push(viewController: vc, isFullScreen: true)
+    }
+    
     func closeModule() {
         self.pop()
     }

@@ -10,6 +10,7 @@ import UIKit
 protocol MainScreenViewControllerProtocol: AnyObject {
     func refreshUICollectionView(data: [MainScreenModel])
     func welcomeButtonWasTapped()
+    func contestWasTapped(with url: URL)
 }
 
 final class MainScreenViewController: UIViewController {
@@ -34,12 +35,16 @@ final class MainScreenViewController: UIViewController {
 
 // MARK: - MainScreenViewControllerProtocol
 extension MainScreenViewController: MainScreenViewControllerProtocol {
+    func contestWasTapped(with url: URL) {
+        self.presenter?.showWebView(with: url)
+    }
+    
     func welcomeButtonWasTapped() {
         self.presenter?.showModalScreen()
     }
     
     func refreshUICollectionView(data: [MainScreenModel]) {
-        self.customView.dataArray = data
+        self.customView.contests = data
         self.customView.collectionView.reloadData()
     }
     

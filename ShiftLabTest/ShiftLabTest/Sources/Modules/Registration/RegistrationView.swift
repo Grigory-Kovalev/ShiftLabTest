@@ -52,9 +52,6 @@ final class RegistrationView: UIView {
     }
     
     // MARK: - Properties
-    //    @objc private var firstSecureIsButtonTapped = false
-    //    @objc private var secondSecureIsButtonTapped = false
-    //    private var confirmButtonIsTapped = false
     
     weak var viewController: RegistrationViewController?
     
@@ -91,6 +88,7 @@ final class RegistrationView: UIView {
     private lazy var birthdayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Resource.RegisterScreen.Colors.customGray
         label.text = Resource.RegisterScreen.Texts.birthdayLabel
         return label
     }()
@@ -214,6 +212,13 @@ final class RegistrationView: UIView {
         return toolbar
     }()
     
+    private lazy var topSafeAreaBackground: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .secondarySystemBackground
+        return view
+    }()
+    
     // MARK: - Initialization
     init() {
         super.init(frame: .zero)
@@ -236,6 +241,14 @@ private extension RegistrationView {
 // MARK: - Layout
 private extension RegistrationView {
     func setupUI() {
+        self.addSubview(topSafeAreaBackground)
+        NSLayoutConstraint.activate([
+            topSafeAreaBackground.topAnchor.constraint(equalTo: topAnchor),
+            topSafeAreaBackground.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            topSafeAreaBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topSafeAreaBackground.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
         self.addSubview(titlesStackView)
         NSLayoutConstraint.activate([
             titlesStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
