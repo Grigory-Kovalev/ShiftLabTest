@@ -5,26 +5,29 @@
 //  Created by Григорий Ковалев on 22.09.2023.
 //
 
-import Foundation
 import UIKit
 
 protocol RegistrationPresenterProtocol: AnyObject {
     func validationCheck(with model: RegistrationModel)
-    func getData(with model: RegistrationModel)
-    
+    func getData(firstName: String, lastName: String, birthday: Date, password: String, confirmPassword: String)
 }
 
 final class RegistrationPresenter {
-    var viewController: RegistrationViewControllerProtocol?
+    weak var viewController: RegistrationViewControllerProtocol?
     var model: RegistrationModel?
     var persistentStorageService: PersistentStorageServiceProtocol?
-
+    var coordinator: CoordinatorProtocol?
     
+    private func showMainScreen() {
+        self.coordinator?.showMainScreen()
+    }
 }
 
 //MARK: - RegistrationPresenterProtocol
 extension RegistrationPresenter: RegistrationPresenterProtocol {
-    func getData(with model: RegistrationModel) {
+    
+    func getData(firstName: String, lastName: String, birthday: Date, password: String, confirmPassword: String) {
+        let model = RegistrationModel(firstName: firstName, lastName: lastName, birthday: birthday, confirmPassword: password, password: confirmPassword)
         self.model = model
         validationCheck(with: model)
     }
@@ -40,7 +43,6 @@ extension RegistrationPresenter: RegistrationPresenterProtocol {
         let currentDate = Date()
         var dateComponents = DateComponents()
         dateComponents.year = -12
-        
         guard let twelveYearsAgo = calendar.date(byAdding: dateComponents, to: currentDate) else { return }
         
         guard firstName.count > 2 && !firstName.contains(where: { $0.isNumber }) else {
@@ -63,7 +65,8 @@ extension RegistrationPresenter: RegistrationPresenterProtocol {
             self.viewController?.showAlert(with: .invalidConfirmPassword)
         return
         }
+        
         self.persistentStorageService?.saveData(of: model)
-        self.viewController?.showMainScreen()
+        self.showMainScreen()
     }
 }

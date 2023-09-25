@@ -29,9 +29,34 @@ enum Resource {
             static let cancelButton = "hide"
                 
         }
+        
+        enum AlertMessages {
+            static let errorTitle = "Ошибка"
+            
+            static func errorMessage(for validationResult: ValidationResults) -> String {
+                switch validationResult {
+                case .invalidFirstName:
+                    return "Имя должно содержать больше двух символов и не содержать чисел!"
+                case .invalidLastName:
+                    return "Фамилия должна содержать больше двух символов и не содержать чисел!"
+                case .invalidBirthday:
+                    return "Минимальный допустимый возраст - 16 лет!"
+                case .invalidPassword:
+                    return "Пароль должен содержать более 5 символов и включать заглавные буквы и числа!"
+                case .invalidConfirmPassword:
+                    return "Пароли не совпадают!"
+                case .success:
+                    return ""
+                }
+            }
+        }
+
+        
         enum Image {
             static let confirmButton = "square"
+            static let confirmButtonFill = "checkmark.square.fill"
             static let secureTextField = "eye.slash"
+            static let notSecureTextField = "eye"
         }
         
         enum Fonts {
@@ -65,10 +90,27 @@ enum Resource {
             
             enum ImageSize {
                 static let firstName: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
-                static let lastName: (width: CGFloat, height: CGFloat) = (width: 25, height: 18)
+                static let lastName: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
                 static let password: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
                 static let confirmPassword: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
             }
+        }
+    }
+    
+    enum MainScreen {
+        enum Fonts {
+            static let titleLabelCell = UIFont.systemFont(ofSize: 16, weight: .bold)
+            static let dateRangeLabelCell = UIFont.systemFont(ofSize: 14)
+        }
+        
+        enum Colors {
+            static let titleLabelTextCell = UIColor.black
+            static let dateRangeLabelTextCell = UIColor.gray
+            static let cellBorderColorCell = UIColor.lightGray
+        }
+        
+        enum Text {
+            static let welcomeButton = "Приветствие"
         }
     }
 }

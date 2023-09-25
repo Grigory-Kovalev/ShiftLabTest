@@ -11,9 +11,44 @@ import UIKit
 protocol PersistentStorageServiceProtocol: AnyObject {
     func saveData(of model: RegistrationModel)
     func deleteAllData()
+    func hasData() -> Bool
+    func getUserName() -> String
 }
 
 final class PersistentStorageService: PersistentStorageServiceProtocol {
+    static let share = PersistentStorageService()
+    
+    func getUserName() -> String {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return ""
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserModel")
+
+        do {
+            let results = try context.fetch(fetchRequest) as? [NSManagedObject]
+            
+            // Проверяем, что у нас есть хотя бы один объект
+            guard let user = results?.first else {
+                print("Данные пользователя не найдены")
+                return ""
+            }
+            
+            // Получаем имя пользователя из объекта
+            if let userFirstName = user.value(forKey: "firstName") as? String, let userLastName = user.value(forKey: "lastName") as? String {
+                return userFirstName + " " + userLastName
+            } else {
+                return ""
+            }
+        } catch {
+            print("Ошибка при получении имени пользователя: \(error)")
+            return ""
+        }
+    }
+
+    
     func saveData(of model: RegistrationModel) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -74,5 +109,24 @@ final class PersistentStorageService: PersistentStorageServiceProtocol {
             print("Ошибка при сохранении контекста: \(error)")
         }
         print("Все данные удалены")
+    }
+    
+    func hasData() -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return false
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+
+    
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserModel")
+
+        do {
+            let count = try context.count(for: fetchRequest)
+            return count > 0
+        } catch {
+            print("Ошибка при проверке наличия данных: \(error)")
+            return false
+        }
     }
 }

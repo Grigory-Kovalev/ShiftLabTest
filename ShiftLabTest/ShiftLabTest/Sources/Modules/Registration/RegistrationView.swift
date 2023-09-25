@@ -9,47 +9,52 @@ import UIKit
 
 protocol RegistrationViewProtocol: AnyObject {
     func registerButtonWasTapped()
-        
+    
 }
 
 final class RegistrationView: UIView {
     //MARK: - Metrics
     enum Metrics {
-    static let titlesStackViewTopConstraint: CGFloat = 32
-    static let stackViewSpacing: CGFloat = 16
-    static let birthdayStackSpacing: CGFloat = 10
-    static let textFieldsStackViewSpacing: CGFloat = 16
-    static let registerButtonCornerRadius: CGFloat = 10
-    static let registerButtontitleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    static let textFieldsStackViewleadingAnchor: CGFloat = 16
-    static let textFieldsStackViewTrailingAnchor: CGFloat = -16
-    static let confirmButtonTopAnchor: CGFloat = 32
-    static let confirmButtonWidth: CGFloat = 25
-    static let confirmButtonHeight: CGFloat = 25
-    static let policyLabelLeadingAnchor: CGFloat = 16
-    static let bottomViewHeight: CGFloat = 40
-    static let registerButtonLeadingSpace: CGFloat = 16
-    static let registerButtonBottomSpace: CGFloat = -16
-    static let registerButtonTrailingSpace: CGFloat = -16
-    static let registerButtonHeight: CGFloat = 50
-    
-    static let textFieldWidth: CGFloat = 343
-    static let textFieldHeight: CGFloat = 58
-    static let textFieldLeadingAnchor: CGFloat = 16
-    static let textFieldTrailingAnchor: CGFloat = -60
-    static let textFieldSecureButtonLeadingAnchor: CGFloat = 16
-    static let textFieldSecureButtonWidth: CGFloat = 25
-    static let textFieldSecureButtonHeight: CGFloat = 25
-    static let textFieldCornerRadius: CGFloat = 10
-    static let textFieldBorderWidth: CGFloat = 2
-    
-    static let animationDuration = 0.3
-}
+        static let titlesStackViewTopConstraint: CGFloat = 16
+        static let stackViewSpacing: CGFloat = 16
+        static let birthdayStackSpacing: CGFloat = 10
+        static let textFieldsStackViewSpacing: CGFloat = 16
+        static let registerButtonCornerRadius: CGFloat = 10
+        static let registerButtontitleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        static let textFieldsStackViewleadingAnchor: CGFloat = 16
+        static let textFieldsStackViewTrailingAnchor: CGFloat = -16
+        
+        static let confirmButtonTopAnchor: CGFloat = 32
+        static let confirmButtonWidth: CGFloat = 25
+        static let confirmButtonHeight: CGFloat = 25
+        
+        static let policyLabelLeadingAnchor: CGFloat = 16
+        
+        static let bottomViewHeight: CGFloat = 40
+        
+        static let registerButtonLeadingSpace: CGFloat = 16
+        static let registerButtonBottomSpace: CGFloat = -16
+        static let registerButtonTrailingSpace: CGFloat = -16
+        static let registerButtonHeight: CGFloat = 50
+        
+        static let textFieldWidth: CGFloat = 343
+        static let textFieldHeight: CGFloat = 58
+        static let textFieldLeadingAnchor: CGFloat = 16
+        static let textFieldTrailingAnchor: CGFloat = -60
+        static let textFieldSecureButtonLeadingAnchor: CGFloat = 16
+        static let textFieldSecureButtonWidth: CGFloat = 25
+        static let textFieldSecureButtonHeight: CGFloat = 25
+        static let textFieldCornerRadius: CGFloat = 10
+        static let textFieldBorderWidth: CGFloat = 2
+        
+        static let animationDuration = 0.3
+    }
     
     // MARK: - Properties
-//    @objc private var firstSecureIsButtonTapped = false
-//    @objc private var secondSecureIsButtonTapped = false
-//    private var confirmButtonIsTapped = false
+    //    @objc private var firstSecureIsButtonTapped = false
+    //    @objc private var secondSecureIsButtonTapped = false
+    //    private var confirmButtonIsTapped = false
     
     weak var viewController: RegistrationViewController?
     
@@ -112,18 +117,18 @@ final class RegistrationView: UIView {
     }()
     
     lazy var textFieldsStackView: UIStackView = {
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.alignment = .center
-    stackView.spacing = Metrics.textFieldsStackViewSpacing
-    stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.firstName,placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.firstName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.firstName)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.firstName))
-    stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.lastName, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.lastName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.lastName)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.lastName))
-    stackView.addArrangedSubview(birthdayStack)
-    stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.password, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.password, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.password)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.password, isSecure: true, selector: #selector(firstSecureButtonTapped)))
-    stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.confirmPassword, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.confirmPassword, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.confirmPassword)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.confirmPassword, isSecure: true, selector: #selector(secondSecureButtonTapped)))
-    return stackView
-}()
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = Metrics.textFieldsStackViewSpacing
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.firstName,placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.firstName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.firstName)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.firstName))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.lastName, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.lastName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.lastName)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.lastName))
+        stackView.addArrangedSubview(birthdayStack)
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.password, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.password, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.password)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.password, isSecure: true, selector: #selector(firstSecureButtonTapped)))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.confirmPassword, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.confirmPassword, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.confirmPassword)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.confirmPassword, isSecure: true, selector: #selector(secondSecureButtonTapped)))
+        return stackView
+    }()
     
     private lazy var confirmButton: UIButton = {
         let confirmButton = UIButton()
@@ -199,15 +204,15 @@ final class RegistrationView: UIView {
     }()
     
     lazy var cancelButton: UIToolbar = {
-    let toolbar = UIToolbar()
-    toolbar.translatesAutoresizingMaskIntoConstraints = false
-    toolbar.sizeToFit()
-    let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    let cancelButton = UIBarButtonItem(title: Resource.RegisterScreen.Texts.cancelButton, style: .plain, target: self, action: #selector(cancelButtonTapped))
-    toolbar.items = [flexibleSpace, cancelButton]
-    
-    return toolbar
-}()
+        let toolbar = UIToolbar()
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: Resource.RegisterScreen.Texts.cancelButton, style: .plain, target: self, action: #selector(cancelButtonTapped))
+        toolbar.items = [flexibleSpace, cancelButton]
+        
+        return toolbar
+    }()
     
     // MARK: - Initialization
     init() {
@@ -236,14 +241,14 @@ private extension RegistrationView {
             titlesStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             titlesStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Metrics.titlesStackViewTopConstraint)
         ])
-
+        
         self.addSubview(textFieldsStackView)
         NSLayoutConstraint.activate([
             textFieldsStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.textFieldsStackViewleadingAnchor),
             textFieldsStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metrics.textFieldsStackViewTrailingAnchor),
             textFieldsStackView.topAnchor.constraint(equalTo: titlesStackView.bottomAnchor, constant: Metrics.textFieldsStackViewSpacing)
         ])
-
+        
         self.addSubview(confirmButton)
         NSLayoutConstraint.activate([
             confirmButton.leadingAnchor.constraint(equalTo: textFieldsStackView.leadingAnchor),
@@ -251,14 +256,14 @@ private extension RegistrationView {
             confirmButton.widthAnchor.constraint(equalToConstant: Metrics.confirmButtonWidth),
             confirmButton.heightAnchor.constraint(equalToConstant: Metrics.confirmButtonHeight)
         ])
-
+        
         self.addSubview(policyLabel)
         NSLayoutConstraint.activate([
             policyLabel.centerYAnchor.constraint(equalTo: confirmButton.centerYAnchor),
             policyLabel.leadingAnchor.constraint(equalTo: confirmButton.trailingAnchor, constant: Metrics.policyLabelLeadingAnchor),
             policyLabel.trailingAnchor.constraint(equalTo: textFieldsStackView.trailingAnchor)
         ])
-
+        
         self.addSubview(bottomView)
         NSLayoutConstraint.activate([
             bottomView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
@@ -266,7 +271,7 @@ private extension RegistrationView {
             bottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             bottomView.heightAnchor.constraint(equalToConstant: Metrics.bottomViewHeight)
         ])
-
+        
         self.addSubview(registerButton)
         NSLayoutConstraint.activate([
             registerButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -275,7 +280,7 @@ private extension RegistrationView {
             registerButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metrics.registerButtonTrailingSpace),
             registerButton.heightAnchor.constraint(equalToConstant: Metrics.registerButtonHeight)
         ])
-
+        
     }
 }
 
@@ -350,7 +355,7 @@ private extension RegistrationView {
         
         return resultView
     }
-
+    
     
     @objc func firstSecureButtonTapped(_ sender: UIButton) {
         self.viewController?.firstSecureButtonTapped(sender)

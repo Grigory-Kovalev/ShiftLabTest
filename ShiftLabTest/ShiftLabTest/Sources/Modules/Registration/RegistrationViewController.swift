@@ -9,7 +9,6 @@ import UIKit
 
 protocol RegistrationViewControllerProtocol: AnyObject {
     func showAlert(with validationResult: ValidationResults)
-    func showMainScreen()
     
     func firstSecureButtonTapped(_ sender: UIButton)
     func secondSecureButtonTapped(_ sender: UIButton)
@@ -21,6 +20,7 @@ protocol RegistrationViewControllerProtocol: AnyObject {
 
 final class RegistrationViewController: UIViewController {
     
+    // MARK: - Properties
     let customView = RegistrationView()
     var presenter: RegistrationPresenterProtocol?
     
@@ -31,6 +31,7 @@ final class RegistrationViewController: UIViewController {
     
     private var confirmButtonIsTapped = false
     
+    // MARK: - Lifecycle
     override func loadView() {
         super.loadView()
         customView.viewController = self
@@ -42,33 +43,19 @@ final class RegistrationViewController: UIViewController {
         setupKeyboardNotifications()
     }
     
+    // MARK: - Private method
     private func createAlert(with validationResult: ValidationResults) {
-        let title = "Ошибка"
-        var message = ""
-        
-        switch validationResult {
-        case .invalidFirstName:
-            message = "Имя должно содержать больше двух символов и не содержать цифр!"
-        case .invalidLastName:
-            message = "Фамилия должна содержать больше двух символов и не содержать цифр!"
-        case .invalidBirthday:
-            message = "Ваш возраст не может быть меньше 12 лет!"
-        case .invalidPassword:
-            message = "Пароль должен содержать более 5 символов и включать заглавные буквы и цифры!"
-        case .invalidConfirmPassword:
-            message = "Пароли не совпадают!"
-        case .success:
-            break
-        }
-        
+        let title = Resource.RegisterScreen.AlertMessages.errorTitle
+        let message = Resource.RegisterScreen.AlertMessages.errorMessage(for: validationResult)
+
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
-        
+
         self.present(alertController, animated: true, completion: nil)
     }
 }
 
+//MARK: - RegistrationViewControllerProtocol
 extension RegistrationViewController: RegistrationViewControllerProtocol {
     func firstSecureButtonTapped(_ buttonSender: UIButton) {
         firstSecureIsButtonTapped.toggle()
@@ -78,9 +65,9 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         }
         
         if firstSecureIsButtonTapped {
-            buttonSender.setImage(UIImage(systemName: "eye"), for: .normal)
+            buttonSender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.notSecureTextField), for: .normal)
         } else {
-            buttonSender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            buttonSender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.secureTextField), for: .normal)
         }
     }
     
@@ -92,9 +79,9 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         }
         
         if secondSecureIsButtonTapped {
-            sender.setImage(UIImage(systemName: "eye"), for: .normal)
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.notSecureTextField), for: .normal)
         } else {
-            sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.secureTextField), for: .normal)
         }
     }
     
@@ -102,11 +89,11 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         confirmButtonIsTapped.toggle()
         
         if !confirmButtonIsTapped {
-            sender.setImage(UIImage(systemName: "square"), for: .normal)
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.confirmButton), for: .normal)
             self.customView.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGray
             self.customView.registerButton.isEnabled = false
         } else {
-            sender.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.confirmButtonFill), for: .normal)
             self.customView.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
             self.customView.registerButton.isEnabled = true
         }
@@ -117,21 +104,13 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     }
     
     func registerButtonTapped() {
-        guard let firstName = (self.customView.viewWithTag(10) as? UITextField)?.text else { return }
-        guard let lastName = (self.customView.viewWithTag(11) as? UITextField)?.text else { return }
-        guard let password = (self.customView.viewWithTag(12) as? UITextField)?.text else { return }
-        guard let confirmPassword = (self.customView.viewWithTag(13) as? UITextField)?.text else { return }
+        guard let firstName = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.firstName) as? UITextField)?.text else { return }
+        guard let lastName = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.lastName) as? UITextField)?.text else { return }
+        guard let password = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.password) as? UITextField)?.text else { return }
+        guard let confirmPassword = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.confirmPassword) as? UITextField)?.text else { return }
         let birthday = self.customView.birthdayDatePicker.date
         
-        let model = RegistrationModel(firstName: firstName, lastName: lastName, birthday: birthday, confirmPassword: password, password: confirmPassword)
-        
-        //self.viewController?.passData(with: model)
-        self.presenter?.getData(with: model)
-    }
-    
-    func showMainScreen() {
-        print("show main screen")
-        //self.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: true)
+        self.presenter?.getData(firstName: firstName, lastName: lastName, birthday: birthday, password: password, confirmPassword: confirmPassword)
     }
     
     func showAlert(with validationResult: ValidationResults) {
@@ -141,7 +120,7 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     
 }
 
-//MARK: - setupKeyboardNotifications
+//MARK: - SetupKeyboardNotifications
 private extension RegistrationViewController {
     
     func setupKeyboardNotifications() {

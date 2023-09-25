@@ -19,6 +19,19 @@
 		3FFE23302ABDEF1C003FCF57 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE232F2ABDEF1C003FCF57 /* RegistrationView.swift */; };
 		3FFE23342ABF3E47003FCF57 /* UserCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23322ABF3E47003FCF57 /* UserCoreData.xcdatamodeld */; };
 		3FFE233A2ABF4021003FCF57 /* PersistentStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23392ABF4021003FCF57 /* PersistentStorageService.swift */; };
+		3FFE233C2ABFCC11003FCF57 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE233B2ABFCC11003FCF57 /* MainScreenView.swift */; };
+		3FFE233E2ABFCC24003FCF57 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE233D2ABFCC24003FCF57 /* MainScreenViewController.swift */; };
+		3FFE23402ABFCD90003FCF57 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE233F2ABFCD90003FCF57 /* MainScreenPresenter.swift */; };
+		3FFE23422ABFCDE6003FCF57 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23412ABFCDE6003FCF57 /* MainScreenModel.swift */; };
+		3FFE23442ABFCE2C003FCF57 /* MainScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23432ABFCE2C003FCF57 /* MainScreenAssembly.swift */; };
+		3FFE23462ABFEA99003FCF57 /* NetworkServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23452ABFEA99003FCF57 /* NetworkServiceModel.swift */; };
+		3FFE23482ABFEBE3003FCF57 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23472ABFEBE3003FCF57 /* NetworkService.swift */; };
+		3FFE236C2AC08872003FCF57 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE236B2AC08872003FCF57 /* Coordinator.swift */; };
+		3FFE236E2AC11EE4003FCF57 /* WelcomeModalScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE236D2AC11EE4003FCF57 /* WelcomeModalScreenViewController.swift */; };
+		3FFE23702AC12DAB003FCF57 /* WelcomeModalScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE236F2AC12DAB003FCF57 /* WelcomeModalScreenPresenter.swift */; };
+		3FFE23722AC160A4003FCF57 /* WelcomeModalScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23712AC160A4003FCF57 /* WelcomeModalScreenAssembly.swift */; };
+		3FFE23742AC1701E003FCF57 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23732AC1701E003FCF57 /* AppCoordinator.swift */; };
+		3FFE23762AC17118003FCF57 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23752AC17118003FCF57 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +49,19 @@
 		3FFE232F2ABDEF1C003FCF57 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		3FFE23332ABF3E47003FCF57 /* UserCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserCoreData.xcdatamodel; sourceTree = "<group>"; };
 		3FFE23392ABF4021003FCF57 /* PersistentStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorageService.swift; sourceTree = "<group>"; };
+		3FFE233B2ABFCC11003FCF57 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		3FFE233D2ABFCC24003FCF57 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		3FFE233F2ABFCD90003FCF57 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
+		3FFE23412ABFCDE6003FCF57 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
+		3FFE23432ABFCE2C003FCF57 /* MainScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAssembly.swift; sourceTree = "<group>"; };
+		3FFE23452ABFEA99003FCF57 /* NetworkServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceModel.swift; sourceTree = "<group>"; };
+		3FFE23472ABFEBE3003FCF57 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		3FFE236B2AC08872003FCF57 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		3FFE236D2AC11EE4003FCF57 /* WelcomeModalScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModalScreenViewController.swift; sourceTree = "<group>"; };
+		3FFE236F2AC12DAB003FCF57 /* WelcomeModalScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModalScreenPresenter.swift; sourceTree = "<group>"; };
+		3FFE23712AC160A4003FCF57 /* WelcomeModalScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModalScreenAssembly.swift; sourceTree = "<group>"; };
+		3FFE23732AC1701E003FCF57 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		3FFE23752AC17118003FCF57 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				3FEEBF852ABC445100EF0AAA /* App */,
+				3FFE236A2AC08852003FCF57 /* Helpers */,
 				3FEEBF862ABC446D00EF0AAA /* Sources */,
 				3FEEBF892ABC456D00EF0AAA /* Services */,
 				3FEEBF8B2ABC45A400EF0AAA /* Resources */,
@@ -109,6 +136,12 @@
 		3FEEBF882ABC44EA00EF0AAA /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				3FFE23752AC17118003FCF57 /* CollectionViewCell.swift */,
+				3FFE233B2ABFCC11003FCF57 /* MainScreenView.swift */,
+				3FFE233D2ABFCC24003FCF57 /* MainScreenViewController.swift */,
+				3FFE233F2ABFCD90003FCF57 /* MainScreenPresenter.swift */,
+				3FFE23412ABFCDE6003FCF57 /* MainScreenModel.swift */,
+				3FFE23432ABFCE2C003FCF57 /* MainScreenAssembly.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -125,6 +158,8 @@
 		3FEEBF8A2ABC458700EF0AAA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3FFE23452ABFEA99003FCF57 /* NetworkServiceModel.swift */,
+				3FFE23472ABFEBE3003FCF57 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -150,8 +185,9 @@
 		3FFE232E2ABDEEBB003FCF57 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3FEEBF882ABC44EA00EF0AAA /* MainScreen */,
 				3FEEBF872ABC44C800EF0AAA /* Registration */,
+				3FEEBF882ABC44EA00EF0AAA /* MainScreen */,
+				3FFE23692AC083E8003FCF57 /* WelcomeModalScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -163,6 +199,25 @@
 				3FFE23392ABF4021003FCF57 /* PersistentStorageService.swift */,
 			);
 			path = persistentStorage;
+			sourceTree = "<group>";
+		};
+		3FFE23692AC083E8003FCF57 /* WelcomeModalScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3FFE236D2AC11EE4003FCF57 /* WelcomeModalScreenViewController.swift */,
+				3FFE236F2AC12DAB003FCF57 /* WelcomeModalScreenPresenter.swift */,
+				3FFE23712AC160A4003FCF57 /* WelcomeModalScreenAssembly.swift */,
+			);
+			path = WelcomeModalScreen;
+			sourceTree = "<group>";
+		};
+		3FFE236A2AC08852003FCF57 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3FFE23732AC1701E003FCF57 /* AppCoordinator.swift */,
+				3FFE236B2AC08872003FCF57 /* Coordinator.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,15 +294,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFE23742AC1701E003FCF57 /* AppCoordinator.swift in Sources */,
+				3FFE23462ABFEA99003FCF57 /* NetworkServiceModel.swift in Sources */,
 				3FFE233A2ABF4021003FCF57 /* PersistentStorageService.swift in Sources */,
 				3F9BFA702ABD81D5004E5E41 /* RegistrationAssembly.swift in Sources */,
 				3FFE232D2ABDEE81003FCF57 /* Resource.swift in Sources */,
+				3FFE23722AC160A4003FCF57 /* WelcomeModalScreenAssembly.swift in Sources */,
+				3FFE23762AC17118003FCF57 /* CollectionViewCell.swift in Sources */,
 				3FFE23342ABF3E47003FCF57 /* UserCoreData.xcdatamodeld in Sources */,
+				3FFE23482ABFEBE3003FCF57 /* NetworkService.swift in Sources */,
+				3FFE236E2AC11EE4003FCF57 /* WelcomeModalScreenViewController.swift in Sources */,
 				3F9BFA722ABD8255004E5E41 /* RegistrationPresenter.swift in Sources */,
+				3FFE233E2ABFCC24003FCF57 /* MainScreenViewController.swift in Sources */,
+				3FFE236C2AC08872003FCF57 /* Coordinator.swift in Sources */,
 				3F71D5472ABC3678006C7A47 /* RegistrationViewController.swift in Sources */,
+				3FFE23702AC12DAB003FCF57 /* WelcomeModalScreenPresenter.swift in Sources */,
 				3F9BFA742ABD8417004E5E41 /* RegistrationModel.swift in Sources */,
+				3FFE23422ABFCDE6003FCF57 /* MainScreenModel.swift in Sources */,
+				3FFE233C2ABFCC11003FCF57 /* MainScreenView.swift in Sources */,
 				3F71D5432ABC3678006C7A47 /* AppDelegate.swift in Sources */,
+				3FFE23442ABFCE2C003FCF57 /* MainScreenAssembly.swift in Sources */,
 				3F71D5452ABC3678006C7A47 /* SceneDelegate.swift in Sources */,
+				3FFE23402ABFCD90003FCF57 /* MainScreenPresenter.swift in Sources */,
 				3FFE23302ABDEF1C003FCF57 /* RegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

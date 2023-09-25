@@ -1,31 +1,32 @@
 //
-//  RegistrationAssembly.swift
+//  MainScreenAssembly.swift
 //  ShiftLabTest
 //
-//  Created by Григорий Ковалев on 22.09.2023.
+//  Created by Григорий Ковалев on 24.09.2023.
 //
 
 import UIKit
 
-protocol RegistrationAssemblyProtocol {
+protocol MainScreenAssemblyProtocol {
     func createModule() -> UIViewController
 }
 
-final class RegistrationAssembly: RegistrationAssemblyProtocol {
+final class MainScreenAssembly: MainScreenAssemblyProtocol {
     
     func createModule() -> UIViewController {
-        let viewController = RegistrationViewController()
-        let presenter = RegistrationPresenter()
-        let persistentStorageService = PersistentStorageService.share
+        let viewController = MainScreenViewController()
+        let presenter = MainScreenPresenter()
         let coordinator = Coordinator.share
         coordinator.rootViewController = viewController
+        let networkService = NetworkService()
         
         // Установка зависимостей
         viewController.presenter = presenter
         presenter.viewController = viewController
         presenter.coordinator = coordinator
-        presenter.persistentStorageService = persistentStorageService
-            
+        presenter.networkService = networkService
+        
+        
         return viewController
     }
 
