@@ -59,18 +59,28 @@ final class RegistrationView: UIView {
         (birthdayLabel.text?.isEmpty)!
     }
     private var isFirstNameTextEmpty: Bool {
-        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.firstName) as? UITextField)?.text?.isEmpty ?? true
+        return ((self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.firstName) as? UITextField)?.text?.isEmpty)!
     }
     private var isLastNameTextEmpty: Bool {
-        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.lastName) as? UITextField)?.text?.isEmpty ?? true
+        ((self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.lastName) as? UITextField)?.text?.isEmpty)!
     }
     private var isPasswordTextEmpty: Bool {
-        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.password) as? UITextField)?.text?.isEmpty ?? true
+        ((self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.password) as? UITextField)?.text?.isEmpty)!
     }
     private var isConfirmPasswordTextEmpty: Bool {
-        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword) as? UITextField)?.text?.isEmpty ?? true
+        ((self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword) as? UITextField)?.text?.isEmpty)!
     }
-
+    private var isConfirmButtonActive = false
+    
+    private func areAllFieldsFilledIn() -> Bool {
+        print("--------------")
+        print("isFirstNameTextEmpty = \(isBirthdayLabelTextEmpty)")
+        print("isLastNameTextEmpty = \(isLastNameTextEmpty)")
+        print("isBirthdayLabelTextEmpty = \(isBirthdayLabelTextEmpty)")
+        print("isPasswordTextEmpty = \(isPasswordTextEmpty)")
+        print("isConfirmPasswordTextEmpty = \(isConfirmPasswordTextEmpty)")
+        return !isFirstNameTextEmpty && !isLastNameTextEmpty && !isBirthdayLabelTextEmpty && !isPasswordTextEmpty && !isConfirmPasswordTextEmpty && isConfirmButtonActive
+    }
     
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
@@ -248,11 +258,23 @@ final class RegistrationView: UIView {
 }
 
 //MARK: - RegistrationViewProtocol
-extension RegistrationView: RegistrationViewProtocol {
+extension RegistrationView: RegistrationViewProtocol, UITextFieldDelegate {
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if self.areAllFieldsFilledIn() {
+            self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
+            self.registerButton.isEnabled = true
+        } else {
+            self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGray
+            self.registerButton.isEnabled = false
+        }
+        return true
+    }
+    
+    
     
     func registerButtonEnable() {
-        print(!isBirthdayLabelTextEmpty, !isLastNameTextEmpty, !isPasswordTextEmpty, !isConfirmPasswordTextEmpty)
-        if !isBirthdayLabelTextEmpty, !isLastNameTextEmpty, !isPasswordTextEmpty, !isConfirmPasswordTextEmpty {
+        if self.areAllFieldsFilledIn() {
             self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
             self.registerButton.isEnabled = true
         }
@@ -358,6 +380,7 @@ private extension RegistrationView {
         
         let textField = UITextField()
         textField.inputAccessoryView = cancelButton
+        textField.delegate = self
         textField.placeholder = placeholder
         textField.isSecureTextEntry = isSecure
         textField.tag = tag
@@ -414,6 +437,7 @@ private extension RegistrationView {
     }
     
     @objc func confirmButtonTapped(_ sender: UIButton) {
+        self.isConfirmButtonActive.toggle()
         self.viewController?.confirmButtonTapped(sender)
     }
     
