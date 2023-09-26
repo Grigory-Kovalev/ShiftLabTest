@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F4074F42AC2C80700510A1E /* TextsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F4074F32AC2C80700510A1E /* TextsData.json */; };
+		3F4074F62AC2CA6E00510A1E /* TextsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4074F52AC2CA6E00510A1E /* TextsDataModel.swift */; };
+		3F4074F82AC2D41E00510A1E /*  TextsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4074F72AC2D41E00510A1E /*  TextsDataService.swift */; };
 		3F71D5432ABC3678006C7A47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F71D5422ABC3678006C7A47 /* AppDelegate.swift */; };
 		3F71D5452ABC3678006C7A47 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F71D5442ABC3678006C7A47 /* SceneDelegate.swift */; };
 		3F71D5472ABC3678006C7A47 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F71D5462ABC3678006C7A47 /* RegistrationViewController.swift */; };
@@ -38,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F4074F32AC2C80700510A1E /* TextsData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TextsData.json; sourceTree = "<group>"; };
+		3F4074F52AC2CA6E00510A1E /* TextsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextsDataModel.swift; sourceTree = "<group>"; };
+		3F4074F72AC2D41E00510A1E /*  TextsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " TextsDataService.swift"; sourceTree = "<group>"; };
 		3F71D53F2ABC3678006C7A47 /* ShiftLabTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShiftLabTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F71D5422ABC3678006C7A47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F71D5442ABC3678006C7A47 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				3FFE232C2ABDEE81003FCF57 /* Resource.swift */,
+				3F4074F32AC2C80700510A1E /* TextsData.json */,
+				3F4074F72AC2D41E00510A1E /*  TextsDataService.swift */,
+				3F4074F52AC2CA6E00510A1E /* TextsDataModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -299,6 +308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F4074F42AC2C80700510A1E /* TextsData.json in Resources */,
 				3F71D54F2ABC367A006C7A47 /* LaunchScreen.storyboard in Resources */,
 				3F71D54C2ABC367A006C7A47 /* Assets.xcassets in Resources */,
 			);
@@ -319,6 +329,7 @@
 				3FFE23722AC160A4003FCF57 /* WelcomeModalScreenAssembly.swift in Sources */,
 				3FFE23762AC17118003FCF57 /* CollectionViewCell.swift in Sources */,
 				3FFE23342ABF3E47003FCF57 /* UserCoreData.xcdatamodeld in Sources */,
+				3F4074F62AC2CA6E00510A1E /* TextsDataModel.swift in Sources */,
 				3FFE23482ABFEBE3003FCF57 /* NetworkService.swift in Sources */,
 				3FFE23782AC1DB4D003FCF57 /* WebViewController.swift in Sources */,
 				3FFE236E2AC11EE4003FCF57 /* WelcomeModalScreenViewController.swift in Sources */,
@@ -327,6 +338,7 @@
 				3FFE236C2AC08872003FCF57 /* Coordinator.swift in Sources */,
 				3F71D5472ABC3678006C7A47 /* RegistrationViewController.swift in Sources */,
 				3FFE23702AC12DAB003FCF57 /* WelcomeModalScreenPresenter.swift in Sources */,
+				3F4074F82AC2D41E00510A1E /*  TextsDataService.swift in Sources */,
 				3F9BFA742ABD8417004E5E41 /* RegistrationModel.swift in Sources */,
 				3FFE23422ABFCDE6003FCF57 /* MainScreenModel.swift in Sources */,
 				3FFE233C2ABFCC11003FCF57 /* MainScreenView.swift in Sources */,

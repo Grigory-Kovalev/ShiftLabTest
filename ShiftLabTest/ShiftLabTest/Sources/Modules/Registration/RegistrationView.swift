@@ -54,6 +54,8 @@ final class RegistrationView: UIView {
     // MARK: - Properties
     
     weak var viewController: RegistrationViewControllerProtocol?
+    var textData: AppData.RegisterScreenDataModel!
+    private var isConfirmButtonActive = false
     
     private var isBirthdayLabelTextEmpty: Bool {
         (birthdayLabel.text?.isEmpty)!
@@ -70,23 +72,12 @@ final class RegistrationView: UIView {
     private var isConfirmPasswordTextEmpty: Bool {
         ((self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword) as? UITextField)?.text?.isEmpty)!
     }
-    private var isConfirmButtonActive = false
-    
-    private func areAllFieldsFilledIn() -> Bool {
-        print("--------------")
-        print("isFirstNameTextEmpty = \(isBirthdayLabelTextEmpty)")
-        print("isLastNameTextEmpty = \(isLastNameTextEmpty)")
-        print("isBirthdayLabelTextEmpty = \(isBirthdayLabelTextEmpty)")
-        print("isPasswordTextEmpty = \(isPasswordTextEmpty)")
-        print("isConfirmPasswordTextEmpty = \(isConfirmPasswordTextEmpty)")
-        return !isFirstNameTextEmpty && !isLastNameTextEmpty && !isBirthdayLabelTextEmpty && !isPasswordTextEmpty && !isConfirmPasswordTextEmpty && isConfirmButtonActive
-    }
     
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Resource.RegisterScreen.Texts.titleText
+        label.text = textData.texts.titleText
         label.font = Resource.RegisterScreen.Fonts.titleFont
         label.textColor = Resource.RegisterScreen.Colors.customGreen
         return label
@@ -95,7 +86,7 @@ final class RegistrationView: UIView {
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Resource.RegisterScreen.Texts.subTitleText
+        label.text = textData.texts.subTitleText
         label.font = Resource.RegisterScreen.Fonts.subTitleFont
         label.textColor = Resource.RegisterScreen.Colors.customGray
         return label
@@ -116,7 +107,7 @@ final class RegistrationView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Resource.RegisterScreen.Colors.customGray
-        label.text = Resource.RegisterScreen.Texts.birthdayLabel
+        label.text = textData.texts.birthdayLabel
         return label
     }()
     
@@ -146,11 +137,25 @@ final class RegistrationView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = Metrics.textFieldsStackViewSpacing
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.firstName,placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.firstName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.firstName)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.firstName))
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.lastName, placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.lastName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.lastName)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.lastName))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.firstName,
+                                                     placeholder: textData.placeholders.firstName,
+                                                     image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.firstName)!, 
+                                                     imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.firstName))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.lastName,
+                                                     placeholder: textData.placeholders.lastName,
+                                                     image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.lastName)!, 
+                                                     imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.lastName))
         stackView.addArrangedSubview(birthdayStack)
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.password, placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.password, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.password)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.password, isSecure: true, selector: #selector(firstSecureButtonTapped)))
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword, placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.confirmPassword, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.confirmPassword)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.confirmPassword, isSecure: true, selector: #selector(secondSecureButtonTapped)))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.password, 
+                                                     placeholder: textData.placeholders.password, 
+                                                     image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.password)!,
+                                                     imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.password, isSecure: true, 
+                                                     selector: #selector(firstSecureButtonTapped)))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword, 
+                                                     placeholder: textData.placeholders.confirmPassword,
+                                                     image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.confirmPassword)!,
+                                                     imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.confirmPassword,
+                                                     isSecure: true, selector: #selector(secondSecureButtonTapped)))
         return stackView
     }()
     
@@ -171,19 +176,21 @@ final class RegistrationView: UIView {
         policyLabel.translatesAutoresizingMaskIntoConstraints = false
         policyLabel.font = Resource.RegisterScreen.Fonts.policyLabel
         policyLabel.numberOfLines = 2
-        let attributedString = NSMutableAttributedString(string: Resource.RegisterScreen.Texts.policyLabel)
+        let attributedString = NSMutableAttributedString(string: textData.texts.policyLabel)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGray, range: NSRange(location: 0, length: attributedString.length))
         
-        let termsRange = (attributedString.string as NSString).range(of: Resource.RegisterScreen.Texts.policyLabelLeadingUnderline)
+        let termsRange = (attributedString.string as NSString).range(of: textData.texts.policyLabelLeadingUnderline)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGreen, range: termsRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: termsRange)
         
-        let privacyRange = (attributedString.string as NSString).range(of: Resource.RegisterScreen.Texts.policyLabelTrailingUnderline)
+        let privacyRange = (attributedString.string as NSString).range(of: textData.texts.policyLabelTrailingUnderline)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGreen, range: privacyRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: privacyRange)
         
         policyLabel.attributedText = attributedString
-        policyLabel.translatesAutoresizingMaskIntoConstraints = false
+        policyLabel.isUserInteractionEnabled = true
+        let labelTapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
+        policyLabel.addGestureRecognizer(labelTapGesture)
         return policyLabel
     }()
     
@@ -192,7 +199,7 @@ final class RegistrationView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = Resource.RegisterScreen.Colors.customGray
         button.isEnabled = false
-        button.setTitle(Resource.RegisterScreen.Texts.registerButton, for: .normal)
+        button.setTitle(textData.texts.registerButton, for: .normal)
         button.layer.cornerRadius = Metrics.registerButtonCornerRadius
         button.titleEdgeInsets = Metrics.registerButtontitleEdgeInsets
         button.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
@@ -207,10 +214,10 @@ final class RegistrationView: UIView {
         let label = UILabel()
         label.font = Resource.RegisterScreen.Fonts.bottomView
         
-        let attributedString = NSMutableAttributedString(string: Resource.RegisterScreen.Texts.bottomView)
+        let attributedString = NSMutableAttributedString(string: textData.texts.bottomView)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGray, range: NSRange(location: 0, length: attributedString.length))
         
-        let termsRange = (attributedString.string as NSString).range(of: Resource.RegisterScreen.Texts.bottomViewUnderline)
+        let termsRange = (attributedString.string as NSString).range(of: textData.texts.bottomViewUnderline)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGreen, range: termsRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: termsRange)
         
@@ -232,14 +239,14 @@ final class RegistrationView: UIView {
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let hideButton = UIBarButtonItem(title: Resource.RegisterScreen.Texts.cancelButton, style: .plain, target: self, action: #selector(cancelButtonTapped))
+        let hideButton = UIBarButtonItem(title: textData.texts.cancelButton, style: .plain, target: self, action: #selector(cancelButtonTapped))
         toolbar.items = [flexibleSpace, hideButton]
         
         return toolbar
     }()
     
     private lazy var topSafeAreaBackground: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .secondarySystemBackground
         return view
@@ -259,7 +266,7 @@ final class RegistrationView: UIView {
 
 //MARK: - RegistrationViewProtocol
 extension RegistrationView: RegistrationViewProtocol, UITextFieldDelegate {
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if self.areAllFieldsFilledIn() {
             self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
@@ -270,9 +277,7 @@ extension RegistrationView: RegistrationViewProtocol, UITextFieldDelegate {
         }
         return true
     }
-    
-    
-    
+
     func registerButtonEnable() {
         if self.areAllFieldsFilledIn() {
             self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
@@ -284,8 +289,6 @@ extension RegistrationView: RegistrationViewProtocol, UITextFieldDelegate {
         self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGray
         self.registerButton.isEnabled = false
     }
-    
-    
 }
 
 //MARK: - Configure
@@ -447,6 +450,13 @@ private extension RegistrationView {
     
     @objc private func registerButtonTapped() {
         self.viewController?.registerButtonTapped()
+    }
+    
+    private func areAllFieldsFilledIn() -> Bool {
+        !isFirstNameTextEmpty && !isLastNameTextEmpty && !isBirthdayLabelTextEmpty && !isPasswordTextEmpty && !isConfirmPasswordTextEmpty && isConfirmButtonActive
+    }
+    @objc private func labelTapped() {
+        self.viewController?.showAlert(with: .info)
     }
 }
 

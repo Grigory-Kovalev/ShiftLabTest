@@ -1,0 +1,46 @@
+
+{
+  "registerScreen": {
+    "texts": {
+      "titleText": "Sing Up",
+      "subTitleText": "Register to get started",
+      "birthdayLabel": "Ваша дата рождения",
+      "policyLabel": "By registering, you are agreeing with our\nTerms of Use and Privacy Policy",
+      "registerButton": "Зарегистрироваться",
+      "bottomView": "Already have an account? Log in",
+      "cancelButton": "hide",
+      "policyLabelLeadingUnderline": "Terms of Use",
+      "policyLabelTrailingUnderline": "Privacy Policy",
+      "bottomViewUnderline": "Log in"
+    },
+    "alertMessages": {
+      "errorTitle": "Ошибка",
+      "infoTitle": "Требования к данным",
+      "invalidFirstName": "Имя должно содержать более двух символов и не содержать числа.",
+      "invalidLastName": "Фамилия должна содержать более двух символов и не содержать числа.",
+      "invalidBirthday": "Минимальный допустимый возраст - 16 лет.",
+      "invalidPassword": "Пароль должен содержать более 5 символов и включать заглавные буквы и цифры.",
+      "invalidConfirmPassword": "Пароли не совпадают.",
+      "info": "- Имя должно содержать более двух символов и не содержать числа.\n- Фамилия должна содержать более двух символов и не содержать числа.\n- Минимальный допустимый возраст - 16 лет.\n- Пароль должен содержать более 5 символов и включать заглавные буквы и цифры.\n- Пароли должны совпадать."
+    },
+    "placeholders": {
+      "firstName": "Введите ваше имя",
+      "lastName": "Введите вашу фамилию",
+      "password": "Введите пароль",
+      "confirmPassword": "Подтвердите пароль"
+    }
+  },
+  "mainScreen": {
+    "texts": {
+      "welcomeButton": "Приветствие"
+    }
+  },
+  "welcomeModalScreen": {
+    "texts": {
+      "closeButton": "close",
+      "removeUserDataButton": "Удалить данные пользователя",
+      "welcomeLabel": "Здраствуйте"
+    }
+  }
+}
+

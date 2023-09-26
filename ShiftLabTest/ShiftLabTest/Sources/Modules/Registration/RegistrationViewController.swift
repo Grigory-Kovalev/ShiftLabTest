@@ -22,6 +22,7 @@ final class RegistrationViewController: UIViewController {
     
     // MARK: - Properties
     private let customView = RegistrationView()
+    var textData: AppData.RegisterScreenDataModel!
     var presenter: RegistrationPresenterProtocol?
     
     private let animationDuration = 0.3
@@ -35,8 +36,9 @@ final class RegistrationViewController: UIViewController {
     // MARK: - Lifecycle
     override func loadView() {
         super.loadView()
-        customView.viewController = self
+        customView.textData = textData
         self.view = customView
+        customView.viewController = self
     }
     
     override func viewDidLoad() {
@@ -46,7 +48,10 @@ final class RegistrationViewController: UIViewController {
     
     // MARK: - Private method
     private func createAlert(with validationResult: ValidationResults) {
-        let title = Resource.RegisterScreen.AlertMessages.errorTitle
+        var title = Resource.RegisterScreen.AlertMessages.errorTitle
+        if validationResult == .info {
+            title = Resource.RegisterScreen.AlertMessages.infoTitle
+        }
         let message = Resource.RegisterScreen.AlertMessages.errorMessage(for: validationResult)
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -135,7 +140,6 @@ private extension RegistrationViewController {
             if textFieldsStackViewBottom < keyboardFrame.height {
                 let yOffset = max(keyboardFrame.height - textFieldsStackViewBottom, 0)
                 UIView.animate(withDuration: animationDuration) {
-                    // Устанавливаю координату Y корневой вью с учетом отступа
                     self.customView.frame.origin.y = -yOffset
                 }
                 self.initialTextFieldsStackViewY = yOffset

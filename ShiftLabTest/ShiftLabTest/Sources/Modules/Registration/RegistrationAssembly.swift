@@ -19,9 +19,11 @@ final class RegistrationAssembly: RegistrationAssemblyProtocol {
         let persistentStorageService = PersistentStorageService.share
         let coordinator = Coordinator.share
         coordinator.rootViewController = viewController
+        let textsDataService = TextsDataService.share
         
         // Установка зависимостей
         viewController.presenter = presenter
+        viewController.textData = textsDataService.getRegisterScreenData()
         presenter.viewController = viewController
         presenter.coordinator = coordinator
         presenter.persistentStorageService = persistentStorageService

@@ -17,7 +17,7 @@ struct RegistrationModel {
 
 enum ValidationResults {
     case invalidFirstName, invalidLastName, invalidBirthday, invalidPassword, invalidConfirmPassword
-    case success
+    case info
 
 }
 

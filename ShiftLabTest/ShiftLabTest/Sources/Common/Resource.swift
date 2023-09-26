@@ -16,24 +16,25 @@ enum Resource {
             static let textFieldBackground = UIColor(named: "TextFieldBackground")
             static let textFieldStroke = UIColor(named: "TextFieldStroke")?.cgColor
             static let textFieldImage = UIColor(named: "TextFieldImage")
-            static let textFieldPlaceholder = UIColor.gray //UIColor(named: "TextFieldPlaceholder")
+            static let textFieldPlaceholder = UIColor.gray
         }
         
-        enum Texts {
-            static let titleText = "Sing Up"
-            static let subTitleText = "Register to get started"
-            static let birthdayLabel = "Ваша дата рождения"
-            static let policyLabel = "By registering, you are agreeing with our\nTerms of Use and Privacy Policy"
-            static let registerButton = "Зарегистрироваться"
-            static let bottomView = "Already have an account? Log in"
-            static let cancelButton = "hide"
-            static let policyLabelLeadingUnderline = "Terms of Use"
-            static let policyLabelTrailingUnderline = "Privacy Policy"
-            static let bottomViewUnderline = "Log in"
-        }
+//        enum Texts {
+//            static let titleText = "Sing Up"
+//            static let subTitleText = "Register to get started"
+//            static let birthdayLabel = "Ваша дата рождения"
+//            static let policyLabel = "By registering, you are agreeing with our\nTerms of Use and Privacy Policy"
+//            static let registerButton = "Зарегистрироваться"
+//            static let bottomView = "Already have an account? Log in"
+//            static let cancelButton = "hide"
+//            static let policyLabelLeadingUnderline = "Terms of Use"
+//            static let policyLabelTrailingUnderline = "Privacy Policy"
+//            static let bottomViewUnderline = "Log in"
+//        }
         
         enum AlertMessages {
             static let errorTitle = "Ошибка"
+            static let infoTitle = "Требования к данным"
             
             static func errorMessage(for validationResult: ValidationResults) -> String {
                 switch validationResult {
@@ -47,8 +48,14 @@ enum Resource {
                     return "Пароль должен содержать более 5 символов и включать заглавные буквы и цифры."
                 case .invalidConfirmPassword:
                     return "Пароли не совпадают."
-                case .success:
-                    return ""
+                case .info:
+                    return """
+                            - Имя должно содержать более двух символов и не содержать числа.
+                            - Фамилия должна содержать более двух символов и не содержать числа.
+                            - Минимальный допустимый возраст - 16 лет.
+                            - Пароль должен содержать более 5 символов и включать заглавные буквы и цифры.
+                            - Пароли должны совпадать.
+                            """
                 }
             }
         }
@@ -76,12 +83,12 @@ enum Resource {
                 static let confirmPassword = 13
             }
             
-            enum Placeholders {
-                static let firstName = "Введите ваше имя"
-                static let lastName = "Введите вашу фамилию"
-                static let password = "Введите пароль"
-                static let confirmPassword = "Подтвердите пароль"
-            }
+//            enum Placeholders {
+//                static let firstName = "Введите ваше имя"
+//                static let lastName = "Введите вашу фамилию"
+//                static let password = "Введите пароль"
+//                static let confirmPassword = "Подтвердите пароль"
+//            }
             
             enum Images {
                 static let firstName = "person.circle"
@@ -113,6 +120,14 @@ enum Resource {
         
         enum Texts {
             static let welcomeButton = "Приветствие"
+        }
+    }
+    
+    enum WelcomeModalScreen {
+        enum Texts {
+            static let closeButton = "close"
+            static let removeUserDataButton = "Удалить данные пользователя"
+            static let welcomeLabel = "Здраствуйте"
         }
     }
 }

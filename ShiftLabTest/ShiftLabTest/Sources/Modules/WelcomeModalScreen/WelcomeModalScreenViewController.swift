@@ -13,6 +13,12 @@ protocol WelcomeModalScreenViewControllerProtocol: AnyObject {
 
 final class WelcomeModalScreenViewController: UIViewController {
     
+    private enum Metrics {
+        static let closeButtonTopOffset: CGFloat = 16
+        static let closeButtonTrailingOffset: CGFloat = -16
+        static let removeUserDataButtonBottomOffset: CGFloat = -32
+    }
+    
     // MARK: - Properties
     var presenter: WelcomeModalScreenPresenterProtocol?
     
@@ -26,7 +32,7 @@ final class WelcomeModalScreenViewController: UIViewController {
     private lazy var closeButton: UIButton = {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("close", for: .normal)
+        button.setTitle(Resource.WelcomeModalScreen.Texts.closeButton, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(closeButtonWasTapped), for: .touchUpInside)
         return button
@@ -35,7 +41,7 @@ final class WelcomeModalScreenViewController: UIViewController {
     private lazy var removeUserDataButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Удалить данные пользователя", for: .normal)
+        button.setTitle(Resource.WelcomeModalScreen.Texts.removeUserDataButton, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.addTarget(self, action: #selector(removeUserDataButtonWasTapped), for: .touchUpInside)
         return button
@@ -72,8 +78,8 @@ private extension WelcomeModalScreenViewController {
     func setupUI() {
         self.view.addSubview(closeButton)
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            closeButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            closeButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: Metrics.closeButtonTopOffset),
+            closeButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: Metrics.closeButtonTrailingOffset)
         ])
         
         self.view.addSubview(welcomeLabel)
@@ -85,7 +91,7 @@ private extension WelcomeModalScreenViewController {
         self.view.addSubview(removeUserDataButton)
         NSLayoutConstraint.activate([
             removeUserDataButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            removeUserDataButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -32)
+            removeUserDataButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: Metrics.removeUserDataButtonBottomOffset)
         ])
     }
     
@@ -96,7 +102,7 @@ private extension WelcomeModalScreenViewController {
     // MARK: - Private method
     func configureLabel() {
         let fullName = self.presenter?.getFullName()
-        self.welcomeLabel.text = "Здраствуйте \(fullName!)!"
+        self.welcomeLabel.text = Resource.WelcomeModalScreen.Texts.welcomeLabel + ", " + "\(fullName!)!"
     }
 }
 

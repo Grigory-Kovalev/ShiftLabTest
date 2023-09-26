@@ -21,12 +21,10 @@ final class WelcomeModalScreenAssembly: MainScreenAssemblyProtocol {
         coordinator.rootViewController = viewController
         
         // Установка зависимостей
-                
         viewController.presenter = presenter
         presenter.viewController = viewController
         presenter.coordinator = coordinator
         presenter.persistentStorageService = persistentStorageService
-        
         
         return viewController
     }

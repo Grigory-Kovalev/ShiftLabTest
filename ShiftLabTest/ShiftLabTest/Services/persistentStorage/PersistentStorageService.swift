@@ -30,13 +30,11 @@ final class PersistentStorageService: PersistentStorageServiceProtocol {
         do {
             let results = try context.fetch(fetchRequest) as? [NSManagedObject]
             
-            // Проверяем, что у нас есть хотя бы один объект
             guard let user = results?.first else {
                 print("Данные пользователя не найдены")
                 return ""
             }
             
-            // Получаем имя пользователя из объекта
             if let userFirstName = user.value(forKey: "firstName") as? String, let userLastName = user.value(forKey: "lastName") as? String {
                 return userFirstName + " " + userLastName
             } else {
@@ -57,7 +55,6 @@ final class PersistentStorageService: PersistentStorageServiceProtocol {
         
         let context = appDelegate.persistentContainer.viewContext
         
-        // Создаем новую сущность
         guard let entity = NSEntityDescription.entity(forEntityName: "UserModel", in: context) else {
             print("no  entity")
             return
@@ -71,7 +68,6 @@ final class PersistentStorageService: PersistentStorageServiceProtocol {
         newObject.setValue(model.password, forKey: "password")
         newObject.setValue(model.confirmPassword, forKey: "confirmPassword")
         
-        // Сохраняем изменения в контексте
         do {
             try context.save()
             print("Данные сохранены в Core Data.")
@@ -88,21 +84,18 @@ final class PersistentStorageService: PersistentStorageServiceProtocol {
         let persistentContainer = appDelegate.persistentContainer
         let context = persistentContainer.viewContext
         
-        // Создание запроса на удаление для каждой сущности
         let entityNames = persistentContainer.managedObjectModel.entities.map { $0.name ?? "" }
         for entityName in entityNames {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
             do {
-                // Выполнение запроса на удаление
                 try persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
             } catch {
                 print("Ошибка при удалении объектов сущности \(entityName): \(error)")
             }
         }
         
-        // Сохранение изменений
         do {
             try context.save()
         } catch {

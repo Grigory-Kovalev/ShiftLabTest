@@ -19,10 +19,8 @@ final class AppCoordinator {
         let hasData = persistentStorageService?.hasData()
         
         if hasData! {
-            print("Данные пользователя существуют, начинаем с mainScreen")
             showMainScreen()
         } else {
-            print("Данные пользователя не существуют, начинаем с registrationScreen")
             showRegistrationScreen()
         }
         
