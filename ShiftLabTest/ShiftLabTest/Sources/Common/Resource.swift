@@ -27,7 +27,9 @@ enum Resource {
             static let registerButton = "Зарегистрироваться"
             static let bottomView = "Already have an account? Log in"
             static let cancelButton = "hide"
-                
+            static let policyLabelLeadingUnderline = "Terms of Use"
+            static let policyLabelTrailingUnderline = "Privacy Policy"
+            static let bottomViewUnderline = "Log in"
         }
         
         enum AlertMessages {
@@ -36,15 +38,15 @@ enum Resource {
             static func errorMessage(for validationResult: ValidationResults) -> String {
                 switch validationResult {
                 case .invalidFirstName:
-                    return "Имя должно содержать больше двух символов и не содержать чисел!"
+                    return "Имя должно содержать более двух символов и не содержать числа."
                 case .invalidLastName:
-                    return "Фамилия должна содержать больше двух символов и не содержать чисел!"
+                    return "Фамилия должна содержать более двух символов и не содержать числа."
                 case .invalidBirthday:
-                    return "Минимальный допустимый возраст - 16 лет!"
+                    return "Минимальный допустимый возраст - 16 лет."
                 case .invalidPassword:
-                    return "Пароль должен содержать более 5 символов и включать заглавные буквы и числа!"
+                    return "Пароль должен содержать более 5 символов и включать заглавные буквы и цифры."
                 case .invalidConfirmPassword:
-                    return "Пароли не совпадают!"
+                    return "Пароли не совпадают."
                 case .success:
                     return ""
                 }
@@ -52,7 +54,7 @@ enum Resource {
         }
 
         
-        enum Image {
+        enum Images {
             static let confirmButton = "square"
             static let confirmButtonFill = "checkmark.square.fill"
             static let secureTextField = "eye.slash"
@@ -66,29 +68,29 @@ enum Resource {
             static let bottomView = UIFont.systemFont(ofSize: 16)
         }
         
-        enum TextFieldConfig {
-            enum Tag {
+        enum TextFieldConfigs {
+            enum Tags {
                 static let firstName = 10
                 static let lastName = 11
                 static let password = 12
                 static let confirmPassword = 13
             }
             
-            enum placeholder {
+            enum Placeholders {
                 static let firstName = "Введите ваше имя"
                 static let lastName = "Введите вашу фамилию"
                 static let password = "Введите пароль"
                 static let confirmPassword = "Подтвердите пароль"
             }
             
-            enum Image {
+            enum Images {
                 static let firstName = "person.circle"
                 static let lastName = "person.circle"
                 static let password = "lock"
                 static let confirmPassword = "lock"
             }
             
-            enum ImageSize {
+            enum ImageSizes {
                 static let firstName: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
                 static let lastName: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
                 static let password: (width: CGFloat, height: CGFloat) = (width: 25, height: 25)
@@ -109,7 +111,7 @@ enum Resource {
             static let cellBorderColorCell = UIColor.lightGray
         }
         
-        enum Text {
+        enum Texts {
             static let welcomeButton = "Приветствие"
         }
     }

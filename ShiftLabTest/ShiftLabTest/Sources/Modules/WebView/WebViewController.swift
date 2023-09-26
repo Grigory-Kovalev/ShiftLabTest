@@ -5,52 +5,9 @@
 //  Created by Григорий Ковалев on 25.09.2023.
 //
 
-protocol WebViewPresenterProtocol {
-    func closeWebView()
-}
-
-final class WebViewPresenter {
-    weak var viewController: WebViewControllerProtocol?
-    weak var coordinator: CoordinatorProtocol?
-}
-
-extension WebViewPresenter: WebViewPresenterProtocol {
-    func closeWebView() {
-        self.coordinator?.closeModule()
-    }
-}
-
-protocol WebViewAssemblyProtocol {
-    func createModule() -> UIViewController
-}
-
-final class WebViewAssembly: WebViewAssemblyProtocol {
-    var url: URL!
-    init(url: URL) {
-        self.url = url
-    }
-    
-    func createModule() -> UIViewController {
-        let viewController = WebViewController()
-        viewController.website = url
-        let navVC = UINavigationController(rootViewController: viewController)
-        let presenter = WebViewPresenter()
-        let coordinator = Coordinator.share
-        
-        // Установка зависимостей
-        viewController.presenter = presenter
-        presenter.viewController = viewController
-        presenter.coordinator = coordinator
-        
-        
-        return navVC
-    }
-
-}
-
-
 import UIKit
 import WebKit
+
 
 protocol WebViewControllerProtocol: AnyObject {
 }

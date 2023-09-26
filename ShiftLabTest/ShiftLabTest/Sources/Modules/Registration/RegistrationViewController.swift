@@ -21,9 +21,10 @@ protocol RegistrationViewControllerProtocol: AnyObject {
 final class RegistrationViewController: UIViewController {
     
     // MARK: - Properties
-    let customView = RegistrationView()
+    private let customView = RegistrationView()
     var presenter: RegistrationPresenterProtocol?
     
+    private let animationDuration = 0.3
     private var initialTextFieldsStackViewY = 0.0
     
     @objc private var firstSecureIsButtonTapped = false
@@ -65,9 +66,9 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         }
         
         if firstSecureIsButtonTapped {
-            buttonSender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.notSecureTextField), for: .normal)
+            buttonSender.setImage(UIImage(systemName: Resource.RegisterScreen.Images.notSecureTextField), for: .normal)
         } else {
-            buttonSender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.secureTextField), for: .normal)
+            buttonSender.setImage(UIImage(systemName: Resource.RegisterScreen.Images.secureTextField), for: .normal)
         }
     }
     
@@ -79,9 +80,9 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         }
         
         if secondSecureIsButtonTapped {
-            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.notSecureTextField), for: .normal)
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Images.notSecureTextField), for: .normal)
         } else {
-            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.secureTextField), for: .normal)
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Images.secureTextField), for: .normal)
         }
     }
     
@@ -89,13 +90,11 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
         confirmButtonIsTapped.toggle()
         
         if !confirmButtonIsTapped {
-            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.confirmButton), for: .normal)
-            self.customView.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGray
-            self.customView.registerButton.isEnabled = false
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Images.confirmButton), for: .normal)
+            self.customView.registerButtonDisable()
         } else {
-            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Image.confirmButtonFill), for: .normal)
-            self.customView.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
-            self.customView.registerButton.isEnabled = true
+            sender.setImage(UIImage(systemName: Resource.RegisterScreen.Images.confirmButtonFill), for: .normal)
+            self.customView.registerButtonEnable()
         }
     }
     
@@ -104,10 +103,10 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     }
     
     func registerButtonTapped() {
-        guard let firstName = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.firstName) as? UITextField)?.text else { return }
-        guard let lastName = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.lastName) as? UITextField)?.text else { return }
-        guard let password = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.password) as? UITextField)?.text else { return }
-        guard let confirmPassword = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfig.Tag.confirmPassword) as? UITextField)?.text else { return }
+        guard let firstName = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.firstName) as? UITextField)?.text else { return }
+        guard let lastName = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.lastName) as? UITextField)?.text else { return }
+        guard let password = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.password) as? UITextField)?.text else { return }
+        guard let confirmPassword = (self.customView.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword) as? UITextField)?.text else { return }
         let birthday = self.customView.birthdayDatePicker.date
         
         self.presenter?.getData(firstName: firstName, lastName: lastName, birthday: birthday, password: password, confirmPassword: confirmPassword)
@@ -116,8 +115,6 @@ extension RegistrationViewController: RegistrationViewControllerProtocol {
     func showAlert(with validationResult: ValidationResults) {
         createAlert(with: validationResult)
     }
-    
-    
 }
 
 //MARK: - SetupKeyboardNotifications
@@ -137,8 +134,9 @@ private extension RegistrationViewController {
             
             if textFieldsStackViewBottom < keyboardFrame.height {
                 let yOffset = max(keyboardFrame.height - textFieldsStackViewBottom, 0)
-                UIView.animate(withDuration: RegistrationView.Metrics.animationDuration) {
-                    self.customView.frame.origin.y = -yOffset // Установить координату Y корневой вью с учетом yOffset
+                UIView.animate(withDuration: animationDuration) {
+                    // Устанавливаю координату Y корневой вью с учетом отступа
+                    self.customView.frame.origin.y = -yOffset
                 }
                 self.initialTextFieldsStackViewY = yOffset
                 customView.cancelButton.isHidden = false
@@ -147,7 +145,7 @@ private extension RegistrationViewController {
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: RegistrationView.Metrics.animationDuration) {
+        UIView.animate(withDuration: animationDuration) {
             self.customView.frame.origin.y = 0
         }
         self.customView.cancelButton.isHidden = true

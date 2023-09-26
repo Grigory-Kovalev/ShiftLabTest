@@ -33,6 +33,8 @@
 		3FFE23742AC1701E003FCF57 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23732AC1701E003FCF57 /* AppCoordinator.swift */; };
 		3FFE23762AC17118003FCF57 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23752AC17118003FCF57 /* CollectionViewCell.swift */; };
 		3FFE23782AC1DB4D003FCF57 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE23772AC1DB4D003FCF57 /* WebViewController.swift */; };
+		3FFE237B2AC25902003FCF57 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE237A2AC25902003FCF57 /* WebViewPresenter.swift */; };
+		3FFE237D2AC2592B003FCF57 /* WebViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE237C2AC2592B003FCF57 /* WebViewAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		3FFE23732AC1701E003FCF57 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3FFE23752AC17118003FCF57 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		3FFE23772AC1DB4D003FCF57 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3FFE237A2AC25902003FCF57 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		3FFE237C2AC2592B003FCF57 /* WebViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewAssembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				3FEEBF852ABC445100EF0AAA /* App */,
-				3FFE236A2AC08852003FCF57 /* Helpers */,
 				3FEEBF862ABC446D00EF0AAA /* Sources */,
 				3FEEBF892ABC456D00EF0AAA /* Services */,
+				3FFE236A2AC08852003FCF57 /* Helpers */,
 				3FEEBF8B2ABC45A400EF0AAA /* Resources */,
 			);
 			path = ShiftLabTest;
@@ -187,10 +191,10 @@
 		3FFE232E2ABDEEBB003FCF57 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3FFE23792AC1DB58003FCF57 /* WebView */,
 				3FEEBF872ABC44C800EF0AAA /* Registration */,
 				3FEEBF882ABC44EA00EF0AAA /* MainScreen */,
 				3FFE23692AC083E8003FCF57 /* WelcomeModalScreen */,
+				3FFE23792AC1DB58003FCF57 /* WebView */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -227,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				3FFE23772AC1DB4D003FCF57 /* WebViewController.swift */,
+				3FFE237A2AC25902003FCF57 /* WebViewPresenter.swift */,
+				3FFE237C2AC2592B003FCF57 /* WebViewAssembly.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -325,10 +331,12 @@
 				3FFE23422ABFCDE6003FCF57 /* MainScreenModel.swift in Sources */,
 				3FFE233C2ABFCC11003FCF57 /* MainScreenView.swift in Sources */,
 				3F71D5432ABC3678006C7A47 /* AppDelegate.swift in Sources */,
+				3FFE237B2AC25902003FCF57 /* WebViewPresenter.swift in Sources */,
 				3FFE23442ABFCE2C003FCF57 /* MainScreenAssembly.swift in Sources */,
 				3F71D5452ABC3678006C7A47 /* SceneDelegate.swift in Sources */,
 				3FFE23402ABFCD90003FCF57 /* MainScreenPresenter.swift in Sources */,
 				3FFE23302ABDEF1C003FCF57 /* RegistrationView.swift in Sources */,
+				3FFE237D2AC2592B003FCF57 /* WebViewAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

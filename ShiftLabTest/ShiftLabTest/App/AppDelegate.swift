@@ -11,7 +11,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    //MARK: - persistent config
+//MARK: - persistent config
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "UserCoreData")
         container.loadPersistentStores { (_, error) in
@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: UISceneSession Lifecycle
-
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
 
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)

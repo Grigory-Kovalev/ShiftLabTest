@@ -8,13 +8,13 @@
 import UIKit
 
 protocol RegistrationViewProtocol: AnyObject {
-    func registerButtonWasTapped()
-    
+    func registerButtonEnable()
+    func registerButtonDisable()
 }
 
 final class RegistrationView: UIView {
     //MARK: - Metrics
-    enum Metrics {
+    private enum Metrics {
         static let titlesStackViewTopConstraint: CGFloat = 16
         static let stackViewSpacing: CGFloat = 16
         static let birthdayStackSpacing: CGFloat = 10
@@ -53,7 +53,24 @@ final class RegistrationView: UIView {
     
     // MARK: - Properties
     
-    weak var viewController: RegistrationViewController?
+    weak var viewController: RegistrationViewControllerProtocol?
+    
+    private var isBirthdayLabelTextEmpty: Bool {
+        (birthdayLabel.text?.isEmpty)!
+    }
+    private var isFirstNameTextEmpty: Bool {
+        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.firstName) as? UITextField)?.text?.isEmpty ?? true
+    }
+    private var isLastNameTextEmpty: Bool {
+        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.lastName) as? UITextField)?.text?.isEmpty ?? true
+    }
+    private var isPasswordTextEmpty: Bool {
+        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.password) as? UITextField)?.text?.isEmpty ?? true
+    }
+    private var isConfirmPasswordTextEmpty: Bool {
+        (self.viewWithTag(Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword) as? UITextField)?.text?.isEmpty ?? true
+    }
+
     
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
@@ -97,7 +114,6 @@ final class RegistrationView: UIView {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.datePickerMode = .date
-        picker.tintColor = .systemBlue
         let currentDate = Date()
         picker.maximumDate = currentDate
         return picker
@@ -120,18 +136,18 @@ final class RegistrationView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = Metrics.textFieldsStackViewSpacing
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.firstName,placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.firstName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.firstName)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.firstName))
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.lastName, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.lastName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.lastName)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.lastName))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.firstName,placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.firstName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.firstName)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.firstName))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.lastName, placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.lastName, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.lastName)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.lastName))
         stackView.addArrangedSubview(birthdayStack)
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.password, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.password, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.password)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.password, isSecure: true, selector: #selector(firstSecureButtonTapped)))
-        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfig.Tag.confirmPassword, placeholder: Resource.RegisterScreen.TextFieldConfig.placeholder.confirmPassword, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfig.Image.confirmPassword)!, imageSize: Resource.RegisterScreen.TextFieldConfig.ImageSize.confirmPassword, isSecure: true, selector: #selector(secondSecureButtonTapped)))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.password, placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.password, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.password)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.password, isSecure: true, selector: #selector(firstSecureButtonTapped)))
+        stackView.addArrangedSubview(createTextField(tag: Resource.RegisterScreen.TextFieldConfigs.Tags.confirmPassword, placeholder: Resource.RegisterScreen.TextFieldConfigs.Placeholders.confirmPassword, image: UIImage(systemName: Resource.RegisterScreen.TextFieldConfigs.Images.confirmPassword)!, imageSize: Resource.RegisterScreen.TextFieldConfigs.ImageSizes.confirmPassword, isSecure: true, selector: #selector(secondSecureButtonTapped)))
         return stackView
     }()
     
     private lazy var confirmButton: UIButton = {
         let confirmButton = UIButton()
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
-        confirmButton.setImage(UIImage(systemName: Resource.RegisterScreen.Image.confirmButton), for: .normal)
+        confirmButton.setImage(UIImage(systemName: Resource.RegisterScreen.Images.confirmButton), for: .normal)
         confirmButton.imageView?.contentMode = .scaleAspectFill
         confirmButton.contentHorizontalAlignment = .fill
         confirmButton.contentVerticalAlignment = .fill
@@ -148,11 +164,11 @@ final class RegistrationView: UIView {
         let attributedString = NSMutableAttributedString(string: Resource.RegisterScreen.Texts.policyLabel)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGray, range: NSRange(location: 0, length: attributedString.length))
         
-        let termsRange = (attributedString.string as NSString).range(of: "Terms of Use")
+        let termsRange = (attributedString.string as NSString).range(of: Resource.RegisterScreen.Texts.policyLabelLeadingUnderline)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGreen, range: termsRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: termsRange)
         
-        let privacyRange = (attributedString.string as NSString).range(of: "Privacy Policy")
+        let privacyRange = (attributedString.string as NSString).range(of: Resource.RegisterScreen.Texts.policyLabelTrailingUnderline)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGreen, range: privacyRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: privacyRange)
         
@@ -184,7 +200,7 @@ final class RegistrationView: UIView {
         let attributedString = NSMutableAttributedString(string: Resource.RegisterScreen.Texts.bottomView)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGray, range: NSRange(location: 0, length: attributedString.length))
         
-        let termsRange = (attributedString.string as NSString).range(of: "Log in")
+        let termsRange = (attributedString.string as NSString).range(of: Resource.RegisterScreen.Texts.bottomViewUnderline)
         attributedString.addAttribute(.foregroundColor, value: Resource.RegisterScreen.Colors.customGreen, range: termsRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: termsRange)
         
@@ -206,8 +222,8 @@ final class RegistrationView: UIView {
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: Resource.RegisterScreen.Texts.cancelButton, style: .plain, target: self, action: #selector(cancelButtonTapped))
-        toolbar.items = [flexibleSpace, cancelButton]
+        let hideButton = UIBarButtonItem(title: Resource.RegisterScreen.Texts.cancelButton, style: .plain, target: self, action: #selector(cancelButtonTapped))
+        toolbar.items = [flexibleSpace, hideButton]
         
         return toolbar
     }()
@@ -229,6 +245,25 @@ final class RegistrationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: - RegistrationViewProtocol
+extension RegistrationView: RegistrationViewProtocol {
+    
+    func registerButtonEnable() {
+        print(!isBirthdayLabelTextEmpty, !isLastNameTextEmpty, !isPasswordTextEmpty, !isConfirmPasswordTextEmpty)
+        if !isBirthdayLabelTextEmpty, !isLastNameTextEmpty, !isPasswordTextEmpty, !isConfirmPasswordTextEmpty {
+            self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGreen
+            self.registerButton.isEnabled = true
+        }
+    }
+    
+    func registerButtonDisable() {
+        self.registerButton.backgroundColor = Resource.RegisterScreen.Colors.customGray
+        self.registerButton.isEnabled = false
+    }
+    
+    
 }
 
 //MARK: - Configure
@@ -347,7 +382,7 @@ private extension RegistrationView {
         
         if isSecure, let selector {
             let secureButton = UIButton()
-            secureButton.setImage(UIImage(systemName: Resource.RegisterScreen.Image.secureTextField), for: .normal)
+            secureButton.setImage(UIImage(systemName: Resource.RegisterScreen.Images.secureTextField), for: .normal)
             secureButton.addTarget(self, action: selector, for: .touchUpInside)
             secureButton.tintColor = Resource.RegisterScreen.Colors.customGreen
             

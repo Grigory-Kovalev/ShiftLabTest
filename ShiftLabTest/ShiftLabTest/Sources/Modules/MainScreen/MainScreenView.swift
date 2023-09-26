@@ -49,7 +49,7 @@ final class MainScreenView: UIView {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = Resource.RegisterScreen.Colors.customGreen
-        button.setTitle(Resource.MainScreen.Text.welcomeButton, for: .normal)
+        button.setTitle(Resource.MainScreen.Texts.welcomeButton, for: .normal)
         button.layer.cornerRadius = Metrics.welcomeButtonCornerRadius
         button.titleEdgeInsets = Metrics.welcomeButtonEdgeInsets
         button.addTarget(self, action: #selector(welcomeButtonWasTapped), for: .touchUpInside)
