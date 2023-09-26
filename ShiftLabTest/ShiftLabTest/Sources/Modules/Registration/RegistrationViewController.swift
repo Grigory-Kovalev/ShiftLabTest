@@ -36,7 +36,6 @@ final class RegistrationViewController: UIViewController {
     // MARK: - Lifecycle
     override func loadView() {
         super.loadView()
-        customView.textData = textData
         self.view = customView
         customView.viewController = self
     }

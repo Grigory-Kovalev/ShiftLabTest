@@ -21,6 +21,7 @@ final class WelcomeModalScreenViewController: UIViewController {
     
     // MARK: - Properties
     var presenter: WelcomeModalScreenPresenterProtocol?
+    let textsData = TextsDataService.share.getWelcomeModalScreenData()
     
     // MARK: - Subviews
     private lazy var welcomeLabel: UILabel = {
@@ -32,7 +33,7 @@ final class WelcomeModalScreenViewController: UIViewController {
     private lazy var closeButton: UIButton = {
        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Resource.WelcomeModalScreen.Texts.closeButton, for: .normal)
+        button.setTitle(textsData.texts.closeButton, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(closeButtonWasTapped), for: .touchUpInside)
         return button
@@ -41,7 +42,7 @@ final class WelcomeModalScreenViewController: UIViewController {
     private lazy var removeUserDataButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(Resource.WelcomeModalScreen.Texts.removeUserDataButton, for: .normal)
+        button.setTitle(textsData.texts.removeUserDataButton, for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
         button.addTarget(self, action: #selector(removeUserDataButtonWasTapped), for: .touchUpInside)
         return button
@@ -102,7 +103,7 @@ private extension WelcomeModalScreenViewController {
     // MARK: - Private method
     func configureLabel() {
         let fullName = self.presenter?.getFullName()
-        self.welcomeLabel.text = Resource.WelcomeModalScreen.Texts.welcomeLabel + ", " + "\(fullName!)!"
+        self.welcomeLabel.text = textsData.texts.welcomeLabel + ", " + "\(fullName!)!"
     }
 }
 

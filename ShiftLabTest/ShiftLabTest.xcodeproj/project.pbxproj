@@ -87,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F2DAFB32AC3067E00713A05 /* TextsDataService */ = {
+			isa = PBXGroup;
+			children = (
+				3F4074F72AC2D41E00510A1E /*  TextsDataService.swift */,
+				3F4074F52AC2CA6E00510A1E /* TextsDataModel.swift */,
+			);
+			path = TextsDataService;
+			sourceTree = "<group>";
+		};
 		3F71D5362ABC3678006C7A47 = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +170,7 @@
 		3FEEBF892ABC456D00EF0AAA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3F2DAFB32AC3067E00713A05 /* TextsDataService */,
 				3FFE23312ABF3DE2003FCF57 /* persistentStorage */,
 				3FEEBF8A2ABC458700EF0AAA /* Network */,
 			);
@@ -191,8 +201,6 @@
 			children = (
 				3FFE232C2ABDEE81003FCF57 /* Resource.swift */,
 				3F4074F32AC2C80700510A1E /* TextsData.json */,
-				3F4074F72AC2D41E00510A1E /*  TextsDataService.swift */,
-				3F4074F52AC2CA6E00510A1E /* TextsDataModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";

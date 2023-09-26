@@ -54,7 +54,7 @@ final class RegistrationView: UIView {
     // MARK: - Properties
     
     weak var viewController: RegistrationViewControllerProtocol?
-    var textData: AppData.RegisterScreenDataModel!
+    let textData = TextsDataService.share.getRegisterScreenData()
     private var isConfirmButtonActive = false
     
     private var isBirthdayLabelTextEmpty: Bool {

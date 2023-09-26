@@ -17,7 +17,6 @@ struct TextsDataService {
         guard let decodedAppData = decodeAppDataFromFile() else {
             fatalError("Не удалось загрузить данные из JSON-файла.")
         }
-        print(decodedAppData)
         self.appData = decodedAppData
     }
     

@@ -14,19 +14,17 @@ protocol RegistrationAssemblyProtocol {
 final class RegistrationAssembly: RegistrationAssemblyProtocol {
     
     func createModule() -> UIViewController {
+        let persistentStorageService = PersistentStorageService.share
         let viewController = RegistrationViewController()
         let presenter = RegistrationPresenter()
-        let persistentStorageService = PersistentStorageService.share
         let coordinator = Coordinator.share
-        coordinator.rootViewController = viewController
-        let textsDataService = TextsDataService.share
         
         // Установка зависимостей
         viewController.presenter = presenter
-        viewController.textData = textsDataService.getRegisterScreenData()
         presenter.viewController = viewController
         presenter.coordinator = coordinator
         presenter.persistentStorageService = persistentStorageService
+        coordinator.rootViewController = viewController
             
         return viewController
     }

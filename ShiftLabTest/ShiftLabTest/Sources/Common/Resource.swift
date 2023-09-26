@@ -19,19 +19,6 @@ enum Resource {
             static let textFieldPlaceholder = UIColor.gray
         }
         
-//        enum Texts {
-//            static let titleText = "Sing Up"
-//            static let subTitleText = "Register to get started"
-//            static let birthdayLabel = "Ваша дата рождения"
-//            static let policyLabel = "By registering, you are agreeing with our\nTerms of Use and Privacy Policy"
-//            static let registerButton = "Зарегистрироваться"
-//            static let bottomView = "Already have an account? Log in"
-//            static let cancelButton = "hide"
-//            static let policyLabelLeadingUnderline = "Terms of Use"
-//            static let policyLabelTrailingUnderline = "Privacy Policy"
-//            static let bottomViewUnderline = "Log in"
-//        }
-        
         enum AlertMessages {
             static let errorTitle = "Ошибка"
             static let infoTitle = "Требования к данным"
@@ -83,13 +70,6 @@ enum Resource {
                 static let confirmPassword = 13
             }
             
-//            enum Placeholders {
-//                static let firstName = "Введите ваше имя"
-//                static let lastName = "Введите вашу фамилию"
-//                static let password = "Введите пароль"
-//                static let confirmPassword = "Подтвердите пароль"
-//            }
-            
             enum Images {
                 static let firstName = "person.circle"
                 static let lastName = "person.circle"
@@ -116,18 +96,6 @@ enum Resource {
             static let titleLabelTextCell = UIColor.black
             static let dateRangeLabelTextCell = UIColor.gray
             static let cellBorderColorCell = UIColor.lightGray
-        }
-        
-        enum Texts {
-            static let welcomeButton = "Приветствие"
-        }
-    }
-    
-    enum WelcomeModalScreen {
-        enum Texts {
-            static let closeButton = "close"
-            static let removeUserDataButton = "Удалить данные пользователя"
-            static let welcomeLabel = "Здраствуйте"
         }
     }
 }
